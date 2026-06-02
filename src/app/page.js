@@ -1,66 +1,64 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Sections from "../components/Sections";
+
+const Canvas3D = dynamic(() => import("../components/Canvas3D"), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      position: "fixed", inset: 0, background: "#070907",
+      display: "flex", justifyContent: "center", alignItems: "center",
+      zIndex: 999, color: "rgba(235,240,236,0.5)",
+      fontFamily: "serif", fontSize: "1rem", letterSpacing: "0.2em",
+      textTransform: "uppercase"
+    }}>
+      Initializing BerryX Systems...
+    </div>
+  )
+});
 
 export default function Home() {
+  const scrollProgressRef = useRef(0);
+  const progressBarRef = useRef(null);
+
+  // Use native scroll event — no Lenis dependency issues
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+      scrollProgressRef.current = progress;
+      if (progressBarRef.current) {
+        progressBarRef.current.style.height = `${progress * 100}%`;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* Fixed 3D Canvas behind everything */}
+      <Canvas3D progressRef={scrollProgressRef} />
+
+      {/* Fixed header */}
+      <header className="header-brand">
+        <div className="header-logo" />
+        <span className="header-name">BERRYX SYSTEMS</span>
+      </header>
+
+      {/* Scroll progress indicator */}
+      <div className="scroll-indicator">
+        <div className="scroll-bar-container">
+          <div ref={progressBarRef} className="scroll-bar-progress" />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <span className="scroll-text">Scroll</span>
+      </div>
+
+      {/* The scrollable story overlay */}
+      <Sections />
+    </>
   );
 }
