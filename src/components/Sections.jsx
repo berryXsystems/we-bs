@@ -9,7 +9,7 @@ const CHAPTERS = [
   { id: "what-we-do",  label: "What We Do",  scene: 1  },
   { id: "mission",     label: "Mission",     scene: 2  },
   { id: "services",    label: "Services",    scene: 3  },
-  { id: "pilot",       label: "BerryX Pilot", scene: 7 },
+  { id: "pilot",       label: "Case Study",  scene: 7 },
   { id: "sectors",     label: "Sectors",     scene: 8  },
   { id: "philosophy",  label: "Philosophy",  scene: 9  },
   { id: "contact",     label: "Contact",     scene: 10 },
