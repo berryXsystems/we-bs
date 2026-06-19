@@ -5,13 +5,14 @@ import { motion, MotionConfig } from "framer-motion";
 
 // ─── CHAPTER DEFINITIONS ────────────────────────────────────────────────
 const CHAPTERS = [
-  { id: "origin",       label: "Origin",       scene: 0  },
-  { id: "mission",      label: "Mission",      scene: 1  },
-  { id: "intelligence", label: "Intelligence", scene: 2  },
-  { id: "services",     label: "Services",     scene: 3  },
-  { id: "sectors",      label: "Sectors",      scene: 7  },
-  { id: "philosophy",   label: "Philosophy",   scene: 8  },
-  { id: "contact",      label: "Contact",      scene: 9  },
+  { id: "origin",      label: "Origin",      scene: 0  },
+  { id: "what-we-do",  label: "What We Do",  scene: 1  },
+  { id: "mission",     label: "Mission",     scene: 2  },
+  { id: "services",    label: "Services",    scene: 3  },
+  { id: "pilot",       label: "BerryX Pilot", scene: 7 },
+  { id: "sectors",     label: "Sectors",     scene: 8  },
+  { id: "philosophy",  label: "Philosophy",  scene: 9  },
+  { id: "contact",     label: "Contact",     scene: 10 },
 ];
 
 // ─── SCENE SECTION ───────────────────────────────────────────────────────
@@ -83,24 +84,21 @@ function ChapterNav({ activeChapter, onNavigate }) {
 // ─── CONSULTATION MODAL ──────────────────────────────────────────────────
 function Modal({ isOpen, onClose }) {
   const [submitted, setSubmitted] = useState(false);
-  const [focused, setFocused]   = useState(null);
+  const [focused, setFocused]     = useState(null);
   const fp = (id) => ({ onFocus: () => setFocused(id), onBlur: () => setFocused(null) });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     const formData = {
-      name: e.target["m-name"].value,
-      org: e.target["m-org"].value,
-      email: e.target["m-email"].value,
-      role: e.target["m-role"].value,
-      industry: e.target["m-industry"].value,
+      name:      e.target["m-name"].value,
+      org:       e.target["m-org"].value,
+      email:     e.target["m-email"].value,
+      role:      e.target["m-role"].value,
+      industry:  e.target["m-industry"].value,
       challenge: e.target["m-challenge"].value,
     };
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -172,6 +170,7 @@ function Modal({ isOpen, onClose }) {
                   <option>Agriculture &amp; Agri-tech</option>
                   <option>Public Sector &amp; Government</option>
                   <option>Healthcare &amp; Life Sciences</option>
+                  <option>Pharmaceutical</option>
                   <option>Other</option>
                 </select>
               </div>
@@ -198,39 +197,33 @@ function Modal({ isOpen, onClose }) {
 
 // ─── MAIN SECTIONS ───────────────────────────────────────────────────────
 export default function Sections() {
-  const [modalOpen,    setModalOpen]    = useState(false);
+  const [modalOpen,     setModalOpen]     = useState(false);
   const [activeChapter, setActiveChapter] = useState("origin");
-  const scenesRef = useRef([]);
 
-  // Register a scene element for scrollspy
-  const registerScene = (el, idx) => { scenesRef.current[idx] = el; };
-
-  // Scroll to a specific scene by index (0-based scene index = scene number)
+  // Scroll to a specific scene by index (0-based)
   const navigateTo = (sceneIndex) => {
-    // Each scene is 100vh. Total page = 1000vh. Scene 0 = top.
     const vh = window.innerHeight;
     window.scrollTo({ top: sceneIndex * vh, behavior: "smooth" });
   };
 
-  // Scroll-spy: update activeChapter based on scroll position
+  // Scroll-spy: map scroll position → active chapter
   useEffect(() => {
-    const SCENE_COUNT = 10;
+    const SCENE_COUNT = 11;
     const onScroll = () => {
       const scrollTop  = window.scrollY;
       const maxScroll  = document.documentElement.scrollHeight - window.innerHeight;
       const progress   = maxScroll > 0 ? scrollTop / maxScroll : 0;
-      const sceneIndex = Math.floor(progress * SCENE_COUNT);
+      const sceneIndex = Math.round(progress * (SCENE_COUNT - 1));
 
-      // Map scene index → chapter
-      if      (sceneIndex <= 0) setActiveChapter("origin");
-      else if (sceneIndex === 1) setActiveChapter("mission");
-      else if (sceneIndex === 2) setActiveChapter("intelligence");
-      else if (sceneIndex >= 3 && sceneIndex <= 6) setActiveChapter("services");
-      else if (sceneIndex === 7) setActiveChapter("sectors");
-      else if (sceneIndex === 8) setActiveChapter("philosophy");
-      else                       setActiveChapter("contact");
+      if      (sceneIndex <= 0)                         setActiveChapter("origin");
+      else if (sceneIndex === 1)                        setActiveChapter("what-we-do");
+      else if (sceneIndex === 2)                        setActiveChapter("mission");
+      else if (sceneIndex >= 3 && sceneIndex <= 6)      setActiveChapter("services");
+      else if (sceneIndex === 7)                        setActiveChapter("pilot");
+      else if (sceneIndex === 8)                        setActiveChapter("sectors");
+      else if (sceneIndex === 9)                        setActiveChapter("philosophy");
+      else                                              setActiveChapter("contact");
     };
-
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -240,30 +233,65 @@ export default function Sections() {
       {/* ── CHAPTER NAVIGATOR ── */}
       <ChapterNav activeChapter={activeChapter} onNavigate={navigateTo} />
 
-      {/* ── SCROLL STORY — 10 × 100vh = 1000vh ── */}
+      {/* ── SCROLL STORY — 11 × 100vh = 1100vh ── */}
       <div style={{ position: "relative", zIndex: 10 }}>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 1 · ORIGIN  (Scene 1)
-            The very first thing the user sees — big, cinematic.
+            SCENE 1 · ORIGIN
+            Hero — immediately tells the visitor who BerryX Systems is.
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="origin">
           <FadeIn>
             <div className="narr">
               <p className="narr-tag">BerryX Systems &mdash; Industrial Intelligence</p>
               <h1 className="narr-headline">
-                Where others see<br />complexity, we see the<br />seed of a <em>better decision.</em>
+                We build <em>AI systems</em><br />for businesses that<br />can't afford to be wrong.
               </h1>
               <p className="narr-sub">
-                AI systems for enterprises operating in complex, regulated,<br />and mission-critical environments.
+                From procurement to compliance, operations to risk —<br />
+                BerryX Systems is the intelligence layer your enterprise has been missing.
               </p>
             </div>
           </FadeIn>
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 2 · MISSION  (Scene 2)
-            Who BerryX Systems is.
+            SCENE 2 · WHAT WE DO
+            Crystal-clear explanation for any first-time visitor.
+            ═══════════════════════════════════════════════════ */}
+        <SceneSection id="what-we-do">
+          <FadeIn>
+            <div className="narr narr--wide">
+              <p className="narr-tag">What We Do</p>
+              <h2 className="narr-headline">
+                We replace guesswork<br />with <em>engineered intelligence.</em>
+              </h2>
+
+              {/* Three clear "what we do" pillars */}
+              <div className="what-we-do-grid">
+                <div className="wwd-item">
+                  <div className="wwd-icon">⬡</div>
+                  <h3>Custom AI Systems</h3>
+                  <p>We design and build proprietary AI platforms for your specific business — from predictive analytics engines to fully autonomous operational workflows.</p>
+                </div>
+                <div className="wwd-item">
+                  <div className="wwd-icon">◈</div>
+                  <h3>Operational Intelligence</h3>
+                  <p>We embed AI directly into your operations — sharpening decisions across procurement, compliance, inventory, resource allocation, and risk management.</p>
+                </div>
+                <div className="wwd-item">
+                  <div className="wwd-icon">◉</div>
+                  <h3>AI Readiness Advisory</h3>
+                  <p>We sit with your leadership team and map exactly where AI would create the highest impact in your organization — free of charge, before any commitment.</p>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </SceneSection>
+
+        {/* ══════════════════════════════════════════════════════
+            SCENE 3 · MISSION
+            Who BerryX Systems is — the vision statement.
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="mission">
           <FadeIn>
@@ -281,26 +309,8 @@ export default function Sections() {
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 3 · INTELLIGENCE  (Scene 3)
-            Architecture statement.
-            ═══════════════════════════════════════════════════ */}
-        <SceneSection id="intelligence">
-          <FadeIn>
-            <div className="narr">
-              <p className="narr-tag">The Architecture</p>
-              <h2 className="narr-headline">
-                We don&apos;t build tools.<br />We become the<br /><em>intelligence layer.</em>
-              </h2>
-              <p className="narr-sub">
-                Built for complexity. Designed for consequence.
-              </p>
-            </div>
-          </FadeIn>
-        </SceneSection>
-
-        {/* ══════════════════════════════════════════════════════
-            CHAPTER 4 · SERVICES  (Scenes 4a–4d)
-            Four open chapter-cards — no boxes, no borders.
+            SCENES 4a–4d · SERVICES
+            Four service pillars — open chapter-cards.
             ═══════════════════════════════════════════════════ */}
 
         {/* 4a — Decision Intelligence */}
@@ -326,7 +336,7 @@ export default function Sections() {
         {/* 4b — Domain-Specific AI */}
         <SceneSection align="right">
           <FadeIn>
-            <div className="chapter-card">
+            <div className="chapter-card chapter-card--right">
               <span className="chapter-num">02</span>
               <p className="chapter-eyebrow">Domain-Specific AI</p>
               <h3 className="chapter-title">AI Native to Your Sector</h3>
@@ -382,7 +392,64 @@ export default function Sections() {
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 5 · SECTORS  (Scene 8)
+            SCENE 8 · BERRYX PILOT — Product Case Study
+            ═══════════════════════════════════════════════════ */}
+        <SceneSection id="pilot" style={{ alignItems: "center", justifyContent: "center", padding: "0 6%" }}>
+          <FadeIn>
+            <div className="pilot-card">
+              {/* Header row */}
+              <div className="pilot-header">
+                <div className="pilot-badge">Case Study · Pharmaceutical</div>
+                <a
+                  href="https://pilot.berryxsystems.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pilot-try-btn"
+                  id="pilot-try-btn"
+                >
+                  Try It Live
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+
+              {/* Product name */}
+              <h2 className="pilot-title">BerryX Pilot</h2>
+              <p className="pilot-subtitle">
+                A centralized business management platform that replaces Excel-based operations with a modern, AI-powered ERP-lite system — built for a leading pharmaceutical company.
+              </p>
+
+              {/* Problem → Solution */}
+              <div className="pilot-cols">
+                <div className="pilot-col">
+                  <p className="pilot-col-label">The Problem</p>
+                  <ul className="pilot-list pilot-list--problem">
+                    <li>Data inconsistency across departments</li>
+                    <li>No real-time visibility into inventory</li>
+                    <li>Manual, error-prone salary calculations</li>
+                    <li>Delayed reporting &amp; poor analytics</li>
+                    <li>Difficulty tracking employee sales performance</li>
+                  </ul>
+                </div>
+                <div className="pilot-col-divider" />
+                <div className="pilot-col">
+                  <p className="pilot-col-label">What BerryX Pilot Does</p>
+                  <ul className="pilot-list pilot-list--solution">
+                    <li>Live stock management &amp; inventory tracking</li>
+                    <li>Employee performance &amp; sales dashboards</li>
+                    <li>Automated attendance &amp; salary processing</li>
+                    <li>Real-time business insights &amp; analytics</li>
+                    <li>Automated report generation — zero manual effort</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </SceneSection>
+
+        {/* ══════════════════════════════════════════════════════
+            SCENE 9 · SECTORS
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="sectors">
           <FadeIn>
@@ -396,6 +463,7 @@ export default function Sections() {
                   "Manufacturing", "Energy & Utilities",
                   "Logistics", "Financial Services",
                   "Agriculture", "Public Sector",
+                  "Pharmaceutical", "Healthcare",
                 ].map(s => (
                   <span key={s} className="sector-tag">{s}</span>
                 ))}
@@ -405,7 +473,7 @@ export default function Sections() {
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 6 · PHILOSOPHY  (Scene 9)
+            SCENE 10 · PHILOSOPHY
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="philosophy">
           <FadeIn>
@@ -420,7 +488,7 @@ export default function Sections() {
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            CHAPTER 7 · CONTACT  (Scene 10)
+            SCENE 11 · CONTACT
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="contact">
           <FadeIn>
@@ -451,6 +519,8 @@ export default function Sections() {
                 <span>Agriculture</span>
                 <span className="dot">&middot;</span>
                 <span>Public Sector</span>
+                <span className="dot">&middot;</span>
+                <span>Pharmaceutical</span>
               </div>
             </div>
           </FadeIn>

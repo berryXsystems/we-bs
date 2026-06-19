@@ -5,14 +5,14 @@
    ═══════════════════════════════════════════════════════ */
 :root {
   --bg:         #060806;
+  --panel:      #0a0d0a;
   --amber:      #c8893a;
-  --amber-dim:  rgba(200, 137, 58, 0.30);
-  --amber-glow: rgba(200, 137, 58, 0.10);
+  --amber-dim:  rgba(200, 137, 58, 0.28);
+  --amber-glow: rgba(200, 137, 58, 0.08);
   --sage:       #4a7a6a;
   --linen:      #edf0ee;
-  --muted:      rgba(237, 240, 238, 0.55);
-  --glass:      rgba(6, 8, 6, 0.80);
-  --border:     rgba(237, 240, 238, 0.09);
+  --muted:      rgba(237, 240, 238, 0.52);
+  --border:     rgba(237, 240, 238, 0.08);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
 }
@@ -46,7 +46,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
-   HEADER — top-left "BERRYX SYSTEMS"
+   HEADER
    ═══════════════════════════════════════════════════════ */
 .header-brand {
   position: fixed;
@@ -59,8 +59,8 @@ body {
 }
 
 .header-logo {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: var(--amber);
   box-shadow: 0 0 14px var(--amber), 0 0 30px rgba(200,137,58,0.4);
@@ -75,15 +75,15 @@ body {
 
 .header-name {
   font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.26em;
   color: var(--linen);
-  text-shadow: 0 0 30px rgba(6,8,6,0.9);
+  text-shadow: 0 0 20px rgba(6,8,6,1);
 }
 
 /* ═══════════════════════════════════════════════════════
-   CHAPTER NAVIGATOR — fixed right side, vertical
+   CHAPTER NAVIGATOR — fixed right side
    ═══════════════════════════════════════════════════════ */
 .chapter-nav {
   position: fixed;
@@ -108,16 +108,11 @@ body {
   cursor: pointer;
   padding: 0.45rem 0;
   flex-direction: row-reverse;
-  color: rgba(237, 240, 238, 0.35);
+  color: rgba(237, 240, 238, 0.3);
   transition: color 0.3s ease;
 }
-
 .chapter-nav-item:hover { color: var(--linen); }
-.chapter-nav-item:hover .chapter-nav-dot {
-  background: var(--linen);
-  transform: scale(1.3);
-}
-
+.chapter-nav-item:hover .chapter-nav-dot { background: var(--linen); transform: scale(1.3); }
 .chapter-nav-item.active { color: var(--amber); }
 .chapter-nav-item.active .chapter-nav-dot {
   background: var(--amber);
@@ -129,14 +124,14 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(237, 240, 238, 0.22);
+  background: rgba(237, 240, 238, 0.2);
   flex-shrink: 0;
   transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 .chapter-nav-label {
   font-family: var(--font-sans);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -146,7 +141,6 @@ body {
   pointer-events: none;
   white-space: nowrap;
 }
-
 .chapter-nav-item:hover .chapter-nav-label,
 .chapter-nav-item.active .chapter-nav-label {
   opacity: 1;
@@ -165,16 +159,14 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  opacity: 0.45;
+  opacity: 0.4;
 }
-
 .scroll-bar-container {
   width: 1px;
   height: 50px;
   background: rgba(237,240,238,0.08);
   position: relative;
 }
-
 .scroll-bar-progress {
   position: absolute;
   top: 0; left: 0;
@@ -183,10 +175,9 @@ body {
   background: var(--amber);
   transition: height 0.06s linear;
 }
-
 .scroll-text {
   font-family: var(--font-sans);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 300;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -195,8 +186,12 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
-   NARRATIVE TEXT BLOCK  (.narr)
-   Full-bleed cinematic — large text, strong dark veil.
+   ──────────────────────────────────────────────────────
+   CINEMATIC NARR BLOCK  (.narr)
+   Used for Hero / Mission / Philosophy / Contact scenes.
+   These deliberately let the 3D animation show through —
+   but with a very strong dark veil for readability.
+   ──────────────────────────────────────────────────────
    ═══════════════════════════════════════════════════════ */
 .narr {
   position: relative;
@@ -210,52 +205,49 @@ body {
   pointer-events: auto;
 }
 
-/* Strong dark veil — ensures readability against 3D background */
+/* Full-coverage dark veil — 97% opacity center, fades out */
 .narr::before {
   content: '';
   position: absolute;
-  inset: -8rem -12rem;
+  inset: -10rem -16rem;
   background: radial-gradient(
-    ellipse 80% 70% at 50% 52%,
-    rgba(6, 8, 6, 0.96) 18%,
-    rgba(6, 8, 6, 0.80) 42%,
-    rgba(6, 8, 6, 0.45) 62%,
+    ellipse 75% 65% at 50% 50%,
+    rgba(6, 8, 6, 0.98) 22%,
+    rgba(6, 8, 6, 0.88) 45%,
+    rgba(6, 8, 6, 0.55) 65%,
     transparent 100%
   );
   z-index: -1;
   pointer-events: none;
 }
 
-.narr--cta { max-width: 900px; }
+.narr--wide { max-width: 1040px; }
+.narr--cta  { max-width: 900px; }
 
-/* ─── NARR TAG ─────────────────────────────────────────── */
+/* ─── Amber eyebrow tag ─────────────────────────────── */
 .narr-tag {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.36em;
   text-transform: uppercase;
   color: var(--amber);
   opacity: 0.85;
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
   display: flex;
   align-items: center;
   gap: 1.2rem;
 }
-
-.narr-tag::before,
-.narr-tag::after {
+.narr-tag::before, .narr-tag::after {
   content: '';
   flex: 1;
   height: 1px;
+  max-width: 48px;
   background: linear-gradient(90deg, transparent, var(--amber-dim));
-  max-width: 50px;
 }
-.narr-tag::after {
-  background: linear-gradient(90deg, var(--amber-dim), transparent);
-}
+.narr-tag::after { background: linear-gradient(90deg, var(--amber-dim), transparent); }
 
-/* ─── NARR HEADLINE ────────────────────────────────────── */
+/* ─── Main headline ─────────────────────────────────── */
 .narr-headline {
   font-family: var(--font-serif);
   font-size: clamp(3rem, 5.5vw, 5.8rem);
@@ -264,11 +256,8 @@ body {
   letter-spacing: -0.022em;
   color: var(--linen);
   margin-bottom: 2rem;
-  text-shadow:
-    0 2px 40px rgba(6, 8, 6, 1),
-    0 0 80px rgba(6, 8, 6, 0.8);
+  text-shadow: 0 2px 60px rgba(6,8,6,1), 0 0 120px rgba(6,8,6,0.9);
 }
-
 .narr-headline em {
   font-style: italic;
   background: linear-gradient(105deg, var(--linen) 10%, var(--amber) 90%);
@@ -277,158 +266,202 @@ body {
   background-clip: text;
 }
 
-/* ─── NARR SUBLINE ─────────────────────────────────────── */
+/* ─── Subline ────────────────────────────────────────── */
 .narr-sub {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 300;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-shadow: 0 1px 20px rgba(6, 8, 6, 0.9);
-  line-height: 1.8;
+  line-height: 1.85;
+  color: rgba(237, 240, 238, 0.62);
+  text-shadow: 0 1px 20px rgba(6, 8, 6, 1);
 }
 
 /* ═══════════════════════════════════════════════════════
+   ──────────────────────────────────────────────────────
+   WHAT WE DO GRID  (Scene 2)
+   Fully opaque dark cards — zero animation bleed-through.
+   ──────────────────────────────────────────────────────
+   ═══════════════════════════════════════════════════════ */
+.what-we-do-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2.8rem;
+  text-align: left;
+  pointer-events: auto;
+  width: 100%;
+}
+
+.wwd-item {
+  background: var(--panel);           /* SOLID opaque dark */
+  border: 1px solid rgba(237, 240, 238, 0.08);
+  border-radius: 4px;
+  padding: 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.35s;
+}
+.wwd-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 1.8rem; right: 1.8rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.wwd-item:hover { border-color: var(--amber-dim); transform: translateY(-3px); }
+.wwd-item:hover::before { opacity: 1; }
+
+.wwd-icon {
+  font-size: 1.4rem;
+  color: var(--amber);
+  margin-bottom: 1.1rem;
+  opacity: 0.7;
+}
+.wwd-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--linen);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.wwd-item p {
+  font-family: var(--font-sans);
+  font-size: 0.87rem;
+  line-height: 1.78;
+  color: rgba(237, 240, 238, 0.55);
+  font-weight: 300;
+}
+
+/* ═══════════════════════════════════════════════════════
+   ──────────────────────────────────────────────────────
    CHAPTER CARDS  (.chapter-card)
-   Service scenes — open layout, NO borders, NO boxes.
-   Big clear text, strong dark veil, readable at a glance.
+   Solid opaque panel — sits cleanly in front of 3D bg.
+   ──────────────────────────────────────────────────────
    ═══════════════════════════════════════════════════════ */
 .chapter-card {
   position: relative;
-  max-width: 580px;
-  padding: 2.5rem 2.5rem 2.5rem 0;
+  max-width: 560px;
+  padding: 2.8rem 3rem;
   pointer-events: auto;
   text-align: left;
+  background: var(--panel);           /* SOLID opaque */
+  border: 1px solid rgba(237, 240, 238, 0.07);
+  border-radius: 4px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.4);
 }
 
-/* Strong dark veil behind the card text */
+/* Amber top accent */
 .chapter-card::before {
   content: '';
   position: absolute;
-  inset: -5rem -3rem -5rem -6rem;
-  background: radial-gradient(
-    ellipse 90% 80% at 15% 50%,
-    rgba(6, 8, 6, 0.97) 12%,
-    rgba(6, 8, 6, 0.82) 40%,
-    rgba(6, 8, 6, 0.50) 62%,
-    transparent 100%
-  );
-  z-index: -1;
-  pointer-events: none;
+  top: 0; left: 2rem; right: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+  border-radius: 0;
 }
 
-/* Right-aligned card veil (scenes 4b & 4d) */
-.chapter-card--right::before {
-  background: radial-gradient(
-    ellipse 90% 80% at 85% 50%,
-    rgba(6, 8, 6, 0.97) 12%,
-    rgba(6, 8, 6, 0.82) 40%,
-    rgba(6, 8, 6, 0.50) 62%,
-    transparent 100%
-  );
-}
-
-/* ─── Ghost chapter number ─────────────────────────────── */
+/* Ghost chapter number — decorative, inside the card */
 .chapter-num {
   display: block;
   font-family: var(--font-serif);
-  font-size: clamp(6rem, 12vw, 11rem);
+  font-size: clamp(5rem, 10vw, 9rem);
   font-weight: 300;
   line-height: 0.85;
-  color: rgba(237, 240, 238, 0.04);
+  color: rgba(237, 240, 238, 0.03);
   pointer-events: none;
   letter-spacing: -0.06em;
   user-select: none;
-  margin-bottom: -1.5rem;
+  margin-bottom: -1.2rem;
   margin-left: -0.2rem;
 }
 
-/* ─── Small amber category label ──────────────────────── */
+/* ─── Amber eyebrow ─────────────────────────────────── */
 .chapter-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--amber);
-  opacity: 0.9;
+  opacity: 0.85;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.8rem;
 }
-
 .chapter-eyebrow::before {
   content: '';
-  width: 28px;
+  width: 22px;
   height: 1px;
   background: var(--amber);
-  opacity: 0.6;
+  opacity: 0.5;
   flex-shrink: 0;
 }
 
-/* ─── Chapter title ────────────────────────────────────── */
+/* ─── Chapter title ─────────────────────────────────── */
 .chapter-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 3.8vw, 4rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.6rem);
   font-weight: 300;
   color: var(--linen);
   line-height: 1.12;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.2rem;
   letter-spacing: -0.018em;
-  text-shadow:
-    0 2px 40px rgba(6, 8, 6, 1),
-    0 0 80px rgba(6, 8, 6, 0.8);
 }
 
-/* ─── Short readable description ──────────────────────── */
+/* ─── Description ───────────────────────────────────── */
 .chapter-desc {
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.75;
-  color: rgba(237, 240, 238, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.78;
+  color: rgba(237, 240, 238, 0.65);
   font-weight: 300;
   margin-bottom: 1.8rem;
-  max-width: 460px;
-  text-shadow: 0 1px 20px rgba(6, 8, 6, 0.9);
 }
 
-/* ─── Keyword chips ────────────────────────────────────── */
+/* ─── Chips ─────────────────────────────────────────── */
 .chapter-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.45rem;
   padding-top: 1.2rem;
-  border-top: 1px solid rgba(237, 240, 238, 0.07);
+  border-top: 1px solid rgba(237, 240, 238, 0.06);
 }
-
 .chapter-chips span {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(237, 240, 238, 0.50);
-  border: 1px solid rgba(237, 240, 238, 0.10);
+  color: rgba(237, 240, 238, 0.45);
+  border: 1px solid rgba(237, 240, 238, 0.09);
   border-radius: 2px;
-  padding: 0.3rem 0.8rem;
-  transition: color 0.3s, border-color 0.3s, background 0.3s;
+  padding: 0.28rem 0.75rem;
+  transition: color 0.3s, border-color 0.3s;
 }
-
 .chapter-chips span:hover {
   color: var(--amber);
   border-color: var(--amber-dim);
-  background: rgba(200, 137, 58, 0.05);
 }
 
-/* ─── Amber accent variant for advisory panel ──────────── */
+/* ─── Amber variant (advisory card) ────────────────── */
+.chapter-card--amber { border-color: rgba(200, 137, 58, 0.18); }
+.chapter-card--amber::before {
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  opacity: 0.4;
+}
 .chapter-card--amber .chapter-title {
   background: linear-gradient(100deg, var(--linen) 30%, var(--amber) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ─── Right-aligned card just flips horizontal position ─ */
+.chapter-card--right { text-align: left; } /* same styling */
 
 /* ═══════════════════════════════════════════════════════
    SECTOR GRID  (Sectors chapter)
@@ -437,29 +470,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.6rem 0.7rem;
-  margin-top: 2.6rem;
-  max-width: 620px;
+  gap: 0.55rem 0.65rem;
+  margin-top: 2.4rem;
+  max-width: 640px;
 }
-
 .sector-tag {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(237, 240, 238, 0.55);
-  border: 1px solid rgba(237, 240, 238, 0.10);
+  color: rgba(237, 240, 238, 0.5);
+  border: 1px solid rgba(237, 240, 238, 0.09);
   border-radius: 2px;
-  padding: 0.42rem 1rem;
-  transition: color 0.4s, border-color 0.4s, background 0.4s;
+  padding: 0.4rem 0.95rem;
+  transition: color 0.4s, border-color 0.4s;
 }
-
-.sector-tag:hover {
-  color: var(--amber);
-  border-color: var(--amber-dim);
-  background: rgba(200, 137, 58, 0.05);
-}
+.sector-tag:hover { color: var(--amber); border-color: var(--amber-dim); }
 
 /* ═══════════════════════════════════════════════════════
    CTA BUTTON
@@ -482,7 +509,6 @@ body {
   transition: color 0.45s, box-shadow 0.45s;
   z-index: 0;
 }
-
 .cta-btn::before {
   content: '';
   position: absolute;
@@ -493,11 +519,10 @@ body {
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: -1;
 }
-
 .cta-btn:hover::before { transform: scaleX(1); }
 .cta-btn:hover { color: var(--bg); box-shadow: 0 0 60px rgba(200,137,58,0.4); }
 
-/* ─── INDUSTRY LIST ────────────────────────────────────── */
+/* ─── Industry list ─────────────────────────────────── */
 .industry-list {
   display: flex;
   flex-wrap: wrap;
@@ -506,14 +531,163 @@ body {
   gap: 0.4rem 0.7rem;
   margin-top: 2.4rem;
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-  opacity: 0.45;
+  opacity: 0.4;
   pointer-events: none;
 }
-.industry-list .dot { opacity: 0.4; }
+.industry-list .dot { opacity: 0.35; }
+
+/* ═══════════════════════════════════════════════════════
+   ──────────────────────────────────────────────────────
+   BERRYX PILOT CARD
+   Fully opaque solid panel — completely blocks the 3D bg.
+   ──────────────────────────────────────────────────────
+   ═══════════════════════════════════════════════════════ */
+.pilot-card {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  background: var(--panel);            /* FULLY OPAQUE */
+  border: 1px solid rgba(237, 240, 238, 0.09);
+  border-top: 1px solid rgba(200, 137, 58, 0.35); /* amber top border */
+  border-radius: 6px;
+  padding: 3rem 3.5rem;
+  pointer-events: auto;
+  box-shadow:
+    0 50px 120px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(200, 137, 58, 0.12);
+}
+
+/* ─── Header Row ─────────────────────────────────────── */
+.pilot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(237, 240, 238, 0.06);
+}
+
+.pilot-badge {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 0.8;
+  border: 1px solid var(--amber-dim);
+  border-radius: 2px;
+  padding: 0.3rem 0.8rem;
+}
+
+.pilot-try-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--amber);
+  border: none;
+  border-radius: 3px;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.pilot-try-btn:hover {
+  opacity: 0.88;
+  box-shadow: 0 0 35px rgba(200, 137, 58, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ─── Title & Subtitle ───────────────────────────────── */
+.pilot-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+  font-weight: 300;
+  color: var(--linen);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+
+.pilot-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.94rem;
+  line-height: 1.78;
+  color: rgba(237, 240, 238, 0.58);
+  font-weight: 300;
+  max-width: 680px;
+  margin-bottom: 2.4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(237, 240, 238, 0.06);
+}
+
+/* ─── Two-column problem/solution ─────────────────────── */
+.pilot-cols {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 2.5rem;
+  align-items: start;
+}
+.pilot-col-divider {
+  background: rgba(237, 240, 238, 0.06);
+  height: 100%;
+  min-height: 150px;
+}
+.pilot-col-label {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  opacity: 0.7;
+  margin-bottom: 1.1rem;
+}
+.pilot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.pilot-list li {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.62;
+  color: rgba(237, 240, 238, 0.65);
+  font-weight: 300;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.pilot-list li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+.pilot-list--problem li::before {
+  background: rgba(185, 58, 74, 0.85);
+  box-shadow: 0 0 8px rgba(185, 58, 74, 0.5);
+}
+.pilot-list--solution li::before {
+  background: var(--sage);
+  box-shadow: 0 0 8px rgba(74, 122, 106, 0.5);
+}
 
 /* ═══════════════════════════════════════════════════════
    MODAL
@@ -521,9 +695,9 @@ body {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6,8,6,0.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(6,8,6,0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -535,8 +709,9 @@ body {
 .modal-backdrop.open { opacity: 1; pointer-events: auto; }
 
 .modal-box {
-  background: #080b08;
-  border: 1px solid rgba(237, 240, 238, 0.09);
+  background: #090c09;
+  border: 1px solid rgba(237, 240, 238, 0.08);
+  border-top-color: rgba(200, 137, 58, 0.3);
   border-radius: 4px;
   padding: 3rem 3.2rem 2.6rem;
   width: 94%;
@@ -546,7 +721,7 @@ body {
   position: relative;
   transform: translateY(30px);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 50px 140px rgba(0,0,0,0.9);
+  box-shadow: 0 60px 160px rgba(0,0,0,0.95);
 }
 .modal-backdrop.open .modal-box { transform: translateY(0); }
 
@@ -562,14 +737,13 @@ body {
 
 .modal-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--amber);
   opacity: 0.75;
   margin-bottom: 0.7rem;
 }
-
 .modal-title {
   font-family: var(--font-serif);
   font-size: 2.2rem;
@@ -579,44 +753,37 @@ body {
   line-height: 1.18;
 }
 .modal-sub {
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  line-height: 1.75;
   color: var(--muted);
   margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(237, 240, 238, 0.07);
+  border-bottom: 1px solid rgba(237, 240, 238, 0.06);
   padding-bottom: 1.6rem;
 }
 
 .form-row { margin-bottom: 1.2rem; }
-
-.form-row-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
+.form-row-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-row label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(237, 240, 238, 0.5);
+  color: rgba(237, 240, 238, 0.45);
   margin-bottom: 0.5rem;
 }
-
 .form-row input,
 .form-row select,
 .form-row textarea {
   width: 100%;
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(237, 240, 238, 0.09);
+  background: rgba(255,255,255,0.022);
+  border: 1px solid rgba(237, 240, 238, 0.08);
   border-radius: 3px;
   padding: 0.8rem 1rem;
   color: var(--linen);
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  transition: border-color 0.3s, background 0.3s;
+  font-size: 0.9rem;
+  transition: border-color 0.3s;
   resize: none;
 }
 .form-row input:focus,
@@ -624,15 +791,13 @@ body {
 .form-row textarea:focus {
   outline: none;
   border-color: var(--amber);
-  background: rgba(200, 137, 58, 0.03);
 }
 .form-row select {
-  background: #080b08;
+  background: #090c09;
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
 }
-
 .form-submit {
   width: 100%;
   margin-top: 0.8rem;
@@ -653,20 +818,15 @@ body {
   transition: opacity 0.3s, box-shadow 0.3s;
 }
 .form-submit:hover { opacity: 0.88; box-shadow: 0 0 40px rgba(200,137,58,0.35); }
-
 .form-footnote {
   text-align: center;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--muted);
-  opacity: 0.5;
+  opacity: 0.45;
   margin-top: 1rem;
   letter-spacing: 0.06em;
 }
-
-.success-msg {
-  text-align: center;
-  padding: 4rem 2rem;
-}
+.success-msg { text-align: center; padding: 4rem 2rem; }
 .success-icon {
   display: block;
   font-size: 2rem;
@@ -680,11 +840,10 @@ body {
   font-weight: 300;
   color: var(--linen);
   margin-bottom: 0.9rem;
-  letter-spacing: -0.01em;
 }
 .success-msg p {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.75;
   max-width: 380px;
   margin: 0 auto;
@@ -695,19 +854,28 @@ body {
    ═══════════════════════════════════════════════════════ */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(200,137,58,0.22); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(200,137,58,0.2); border-radius: 2px; }
 
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .what-we-do-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+}
+
 @media (max-width: 768px) {
   .chapter-nav { right: 1rem; }
   .chapter-nav-label { display: none; }
   .chapter-card { max-width: 90vw; padding: 2rem 1.5rem; }
-  .narr { padding: 2.5rem 1.5rem; }
+  .narr { padding: 2.5rem 1.5rem; max-width: 95vw; }
   .narr-headline { font-size: clamp(2.4rem, 8vw, 3.5rem); }
   .chapter-title { font-size: clamp(2rem, 6vw, 3rem); }
-  .chapter-desc { font-size: 0.95rem; }
+  .chapter-desc { font-size: 0.9rem; }
   .form-row-pair { grid-template-columns: 1fr; }
   .modal-box { padding: 2rem 1.5rem; }
+  .pilot-card { padding: 2rem 1.5rem; }
+  .pilot-cols { grid-template-columns: 1fr; gap: 1.5rem 0; }
+  .pilot-col-divider { display: none; }
+  .pilot-title { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .what-we-do-grid { grid-template-columns: 1fr; }
 }
