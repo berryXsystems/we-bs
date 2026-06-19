@@ -1,8 +1,8 @@
 import { MONTHLY_SALES, EMPLOYEES, PRODUCTS, SALES } from '../data'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell, Legend } from 'recharts'
 
-const GOLD = '#c8893a'
-const COLORS = ['#c8893a','#e0a84e','#4a7a6a','#3a6bc8','#b94040','#888']
+const GOLD = '#dfb76c'
+const COLORS = ['#dfb76c','#f2ddb3','#4a7a6a','#3a6bc8','#b94040','#888']
 
 export default function ReportsPage() {
   const employeeSales = EMPLOYEES.map(e => ({ name: e.name.split(' ')[0], sales: e.sales }))

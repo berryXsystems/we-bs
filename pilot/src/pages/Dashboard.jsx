@@ -2,8 +2,8 @@ import { EMPLOYEES, PRODUCTS, SALES, MONTHLY_SALES } from '../data'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { Users, Package, ShoppingCart, TrendingUp, AlertTriangle, IndianRupee } from 'lucide-react'
 
-const GOLD = '#c8893a'
-const GOLD2 = '#e0a84e'
+const GOLD = '#dfb76c'
+const GOLD2 = '#f2ddb3'
 
 function StatCard({ icon: Icon, label, value, change, sub, danger }) {
   return (
