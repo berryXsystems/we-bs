@@ -401,7 +401,7 @@ export default function Sections() {
               <div className="pilot-header">
                 <div className="pilot-badge">Case Study · Pharmaceutical</div>
                 <a
-                  href={process.env.NEXT_PUBLIC_PILOT_URL || "https://pilot.berryxsystems.com"}
+                  href={process.env.NEXT_PUBLIC_PILOT_URL || "/pilot"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pilot-try-btn"
