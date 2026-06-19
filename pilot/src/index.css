@@ -231,7 +231,7 @@ html, body, #root {
   color: var(--gold);
 }
 .stat-card-icon svg { width: 18px; height: 18px; }
-.stat-card-value { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--linen); line-height: 1; margin-bottom: 0.4rem; }
+.stat-card-value { font-family: var(--font-sans); font-size: 2.1rem; font-weight: 600; color: var(--linen); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
 .stat-card-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
 .stat-card-change { font-size: 0.78rem; margin-top: 0.6rem; display: flex; align-items: center; gap: 0.4rem; }
 .stat-card-change.up { color: var(--success); }
