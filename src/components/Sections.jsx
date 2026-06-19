@@ -392,14 +392,14 @@ export default function Sections() {
         </SceneSection>
 
         {/* ══════════════════════════════════════════════════════
-            SCENE 8 · BERRYX PILOT — Product Case Study
+            SCENE 8 · BERRYX PILOT — Flagship Platform
             ═══════════════════════════════════════════════════ */}
         <SceneSection id="pilot" style={{ alignItems: "center", justifyContent: "center", padding: "0 6%" }}>
           <FadeIn>
             <div className="pilot-card">
               {/* Header row */}
               <div className="pilot-header">
-                <div className="pilot-badge">Case Study · Pharmaceutical</div>
+                <div className="pilot-badge">Flagship Platform · Multi-Sector ERP-Lite</div>
                 <a
                   href={process.env.NEXT_PUBLIC_PILOT_URL || "/pilot"}
                   target="_blank"
@@ -417,7 +417,7 @@ export default function Sections() {
               {/* Product name */}
               <h2 className="pilot-title">BerryX Pilot</h2>
               <p className="pilot-subtitle">
-                A centralized business management platform that replaces Excel-based operations with a modern, AI-powered ERP-lite system — built for a leading pharmaceutical company.
+                Our signature modular operations engine designed to unify inventory, sales tracking, payroll, and real-time analytics into a single intelligent platform—built to replace manual spreadsheet chaos in any industry. *(Interactive demo below is pre-configured with a sample dataset for a pharmaceutical client).*
               </p>
 
               {/* Problem → Solution */}
@@ -426,21 +426,21 @@ export default function Sections() {
                   <p className="pilot-col-label">The Problem</p>
                   <ul className="pilot-list pilot-list--problem">
                     <li>Data inconsistency across departments</li>
-                    <li>No real-time visibility into inventory</li>
-                    <li>Manual, error-prone salary calculations</li>
-                    <li>Delayed reporting &amp; poor analytics</li>
-                    <li>Difficulty tracking employee sales performance</li>
+                    <li>No real-time visibility into inventory and stock</li>
+                    <li>Manual, error-prone payroll and compensation</li>
+                    <li>Delayed reporting &amp; fragmented operational analytics</li>
+                    <li>Difficulty tracking field performance and targets</li>
                   </ul>
                 </div>
                 <div className="pilot-col-divider" />
                 <div className="pilot-col">
                   <p className="pilot-col-label">What BerryX Pilot Does</p>
                   <ul className="pilot-list pilot-list--solution">
-                    <li>Live stock management &amp; inventory tracking</li>
-                    <li>Employee performance &amp; sales dashboards</li>
-                    <li>Automated attendance &amp; salary processing</li>
-                    <li>Real-time business insights &amp; analytics</li>
-                    <li>Automated report generation — zero manual effort</li>
+                    <li>Live stock management &amp; unified operational tracking</li>
+                    <li>Real-time visual dashboards &amp; sales performance metrics</li>
+                    <li>Automated attendance &amp; payroll processing engine</li>
+                    <li>Custom business intelligence insights &amp; predictive analytics</li>
+                    <li>Seamless, automated report generation — zero manual effort</li>
                   </ul>
                 </div>
               </div>
