@@ -58,17 +58,12 @@ html, body, #root {
   align-items: center;
   gap: 0.7rem;
 }
-.sidebar-logo-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 12px var(--gold), 0 0 24px rgba(223, 183, 108, 0.4);
+.sidebar-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
   flex-shrink: 0;
-  animation: goldPulse 2.5s ease-in-out infinite;
-}
-@keyframes goldPulse {
-  0%,100% { box-shadow: 0 0 10px var(--gold), 0 0 20px rgba(223, 183, 108, 0.3); }
-  50%      { box-shadow: 0 0 18px var(--gold), 0 0 40px rgba(223, 183, 108, 0.6); }
+  filter: drop-shadow(0 0 8px rgba(223, 183, 108, 0.4));
 }
 .sidebar-logo-text { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.15em; color: var(--linen); }
 .sidebar-logo-sub  { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-top: 0.15rem; }

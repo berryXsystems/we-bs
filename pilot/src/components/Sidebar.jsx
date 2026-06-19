@@ -24,7 +24,7 @@ export default function Sidebar({ activePage, onNavigate }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="sidebar-logo-dot" />
+        <img src="/pilot/favicon.ico" className="sidebar-logo-img" alt="BerryX Logo" />
         <div>
           <div className="sidebar-logo-text">BerryX Pilot</div>
           <div className="sidebar-logo-sub">Pharma Intelligence</div>

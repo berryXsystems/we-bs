@@ -9,12 +9,17 @@ const Canvas3D = dynamic(() => import("../components/Canvas3D"), {
   loading: () => (
     <div style={{
       position: "fixed", inset: 0, background: "#070907",
-      display: "flex", justifyContent: "center", alignItems: "center",
-      zIndex: 999, color: "rgba(235,240,236,0.5)",
-      fontFamily: "serif", fontSize: "1rem", letterSpacing: "0.2em",
-      textTransform: "uppercase"
+      display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
+      zIndex: 999, gap: "1.5rem"
     }}>
-      Initializing BerryX Systems...
+      <img src="/logo.jpg" alt="BerryX Systems Logo" style={{ width: "60px", height: "60px", objectFit: "contain", opacity: 0.8 }} />
+      <div style={{
+        color: "rgba(235,240,236,0.5)",
+        fontFamily: "serif", fontSize: "0.95rem", letterSpacing: "0.2em",
+        textTransform: "uppercase"
+      }}>
+        Initializing BerryX Systems...
+      </div>
     </div>
   )
 });
@@ -45,7 +50,7 @@ export default function Home() {
 
       {/* Fixed header */}
       <header className="header-brand">
-        <div className="header-logo" />
+        <img src="/logo.jpg" alt="BerryX Systems Logo" className="header-logo-img" />
         <span className="header-name">BERRYX SYSTEMS</span>
       </header>
 
